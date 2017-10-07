@@ -1,0 +1,7 @@
+.idea/
+out/
+test/
+testcase/test5.txt
+testcase/test6.txt
+*.iml
+.DS_STORE

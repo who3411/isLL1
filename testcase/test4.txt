@@ -1,0 +1,6 @@
+CODE ::= {{ LINE {{ TEST } LOOP } WEST } EAST } EOF
+LINE ::= LINE | XXX | ~
+TEST ::= AAA
+LOOP ::= BBB
+WEST ::= CCC
+EAST ::= DDD

@@ -1,0 +1,4 @@
+CODE ::= { LINE } EOF
+LINE ::= [ TEST ] NL
+TEST ::= INST | END | LOOP
+LOOP ::= ( INST | END ) LOOP

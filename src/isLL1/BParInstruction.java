@@ -10,9 +10,10 @@ class BParInstruction extends ParInstruction{
 
     public ArrayList<ArrayList<MyToken>> makeNoPar(int startIndex, int endIndex){
         ArrayList<ArrayList<MyToken>> dArray  = makeOrTokenList(startIndex, endIndex);
+        @SuppressWarnings("unchecked")
         ArrayList<ArrayList<MyToken>> cDArray = (ArrayList<ArrayList<MyToken>>)dArray.clone();
-        List startList = array.subList(0, startIndex);
-        List endList   = array.subList(endIndex + 1, array.size());
+        List<MyToken> startList = array.subList(0, startIndex);
+        List<MyToken> endList   = array.subList(endIndex + 1, array.size());
         ArrayList<MyToken> empArray = new ArrayList<MyToken>();
 
         for(int i = 0;i < cDArray.size();i++){

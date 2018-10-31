@@ -60,8 +60,8 @@ class LL1Check{
 			}
 			/*
 			inData.changeAlter();
-			for(Iterator i = inData.values().iterator();i.hasNext();){
-				ArrayList<MyToken> test = (ArrayList<MyToken>)i.next();
+			for(Iterator<ArrayList<MyToken>> i = inData.values().iterator();i.hasNext();){
+				ArrayList<MyToken> test = i.next();
 				System.out.println(test.size());
 			}
 			System.out.println();

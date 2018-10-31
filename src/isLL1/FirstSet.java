@@ -26,10 +26,10 @@ class FirstSet extends MyMakeSet {
 
         First   first = new First(makeSymbolName);
         ArrayList<MyToken> array = first.getArray();
-        Iterator i = inData.get(makeSymbolName).iterator();
+        Iterator<ArrayList<MyToken>> i = inData.get(makeSymbolName).iterator();
 
         while(i.hasNext()){
-            ArrayList<MyToken> iArray = (ArrayList<MyToken>)i.next();
+            ArrayList<MyToken> iArray = i.next();
             MyToken tk = iArray.get(0);
 
             if(tk.getType() == MyToken.TSYMBOL) {

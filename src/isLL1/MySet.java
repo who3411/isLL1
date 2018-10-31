@@ -35,10 +35,10 @@ abstract class MySet {
     }
 
     public boolean isSet(int type){
-        Iterator i = array.iterator();
+        Iterator<MyToken> i = array.iterator();
 
         while(i.hasNext()){
-            MyToken tk = (MyToken)i.next();
+            MyToken tk = i.next();
             if(tk.getType() == type){
                 return true;
             }

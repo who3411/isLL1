@@ -22,20 +22,20 @@ class FollowSet extends MyMakeSet {
         int refCount = 0;
         Follow  follow = new Follow(makeSymbolName);
         ArrayList<MyToken> array = follow.getArray();
-        Iterator i  = inData.values().iterator();
-        Iterator i2 = inData.keySet().iterator();
+        Iterator<ArrayList<ArrayList<MyToken>>> i  = inData.values().iterator();
+        Iterator<String> i2 = inData.keySet().iterator();
 
         while(i.hasNext()){
-            ArrayList<ArrayList<MyToken>> dArray = (ArrayList<ArrayList<MyToken>>)i.next();
-            String symbolName = (String)i2.next();
-            Iterator ii = dArray.iterator();
+            ArrayList<ArrayList<MyToken>> dArray = i.next();
+            String symbolName = i2.next();
+            Iterator<ArrayList<MyToken>> ii = dArray.iterator();
 
             while(ii.hasNext()){
-                ArrayList<MyToken> iiArray = (ArrayList<MyToken>)ii.next();
-                Iterator iii = iiArray.iterator();
+                ArrayList<MyToken> iiArray = ii.next();
+                Iterator<MyToken> iii = iiArray.iterator();
 
                 while(iii.hasNext()){
-                    MyToken tk = (MyToken)iii.next();
+                    MyToken tk = iii.next();
 
                     if(makeSymbolName.equals(tk.getName())){
                         int nextNum  = iiArray.indexOf(tk) + 1;

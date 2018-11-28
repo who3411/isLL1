@@ -10,8 +10,8 @@ class NParInstruction extends ParInstruction{
 
     public ArrayList<ArrayList<MyToken>> makeNoPar(int startIndex, int endIndex){
         ArrayList<ArrayList<MyToken>> dArray = makeOrTokenList(startIndex, endIndex);
-        List startList = array.subList(0, startIndex);
-        List endList   = array.subList(endIndex + 1, array.size());
+        List<MyToken> startList = array.subList(0, startIndex);
+        List<MyToken> endList   = array.subList(endIndex + 1, array.size());
 
         for(int i = 0;i < dArray.size();i++){
             ArrayList<MyToken> retArray = dArray.get(i);

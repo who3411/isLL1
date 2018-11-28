@@ -10,12 +10,12 @@ abstract class MyMakeSet extends LinkedHashMap<String, ArrayList<MySet>>{
     }
 
     public String makeAllSet(){
-        Iterator i = inData.keySet().iterator();
+        Iterator<String> i = inData.keySet().iterator();
 
         strLine = null;
 
         while(i.hasNext()){
-            String symbolName = (String)i.next();
+            String symbolName = i.next();
 
             put(symbolName, null);
         }
@@ -23,7 +23,7 @@ abstract class MyMakeSet extends LinkedHashMap<String, ArrayList<MySet>>{
         i = inData.keySet().iterator();
         while(i.hasNext()){
             ArrayList<MySet> array;
-            String symbolName = (String)i.next();
+            String symbolName = i.next();
 
             if(get(symbolName) == null){
                 array = makeOneSet(symbolName);
@@ -40,13 +40,13 @@ abstract class MyMakeSet extends LinkedHashMap<String, ArrayList<MySet>>{
 
     public String toAllSetString(String methodName){
         StringBuffer strBuf = new StringBuffer();
-        Iterator i = values().iterator();
+        Iterator<ArrayList<MySet>> i = values().iterator();
 
         while(i.hasNext()){
-            ArrayList<MySet> setArray = (ArrayList<MySet>)i.next();
-            Iterator ii = setArray.iterator();
+            ArrayList<MySet> setArray = i.next();
+            Iterator<MySet> ii = setArray.iterator();
             while (ii.hasNext()){
-                MySet set  = (MySet)ii.next();
+                MySet set  = ii.next();
                 String str = set.toSetString(methodName);
 
                 strBuf.append(str);
@@ -57,12 +57,12 @@ abstract class MyMakeSet extends LinkedHashMap<String, ArrayList<MySet>>{
     }
 
     public void removeDup(ArrayList<MyToken> array){
-        HashSet hSet = new HashSet();
+        HashSet<String> hSet = new HashSet<String>();
         ArrayList<MyToken> retArray = new ArrayList<MyToken>();
-        Iterator i = array.iterator();
+        Iterator<MyToken> i = array.iterator();
 
         while(i.hasNext()){
-            MyToken tk = (MyToken)i.next();
+            MyToken tk = i.next();
 
             if(!hSet.contains(tk.getName())){
                 hSet.add(tk.getName());

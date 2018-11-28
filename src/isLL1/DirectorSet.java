@@ -19,10 +19,10 @@ class DirectorSet extends MyMakeSet {
     protected ArrayList<MySet> makeOneSet(String makeSymbolName){
         ArrayList<MySet> retArray = new ArrayList<MySet>();
         ArrayList<ArrayList<MyToken>> dArray = inData.get(makeSymbolName);
-        Iterator i = dArray.iterator();
+        Iterator<ArrayList<MyToken>> i = dArray.iterator();
 
         while(i.hasNext()){
-            ArrayList<MyToken> iArray = (ArrayList<MyToken>)i.next();
+            ArrayList<MyToken> iArray = i.next();
             MyToken tk = iArray.get(0);
             Director director;
             MySet    firstOrFollow = null;
@@ -101,12 +101,12 @@ class DirectorSet extends MyMakeSet {
     }
 
     public String isLL1(){
-        Iterator i  = values().iterator();
-        Iterator i2 = keySet().iterator();
+        Iterator<ArrayList<MySet>> i  = values().iterator();
+        Iterator<String> i2 = keySet().iterator();
 
         while(i.hasNext()){
-            ArrayList<MySet> array = (ArrayList<MySet>)i.next();
-            String symbolName = (String)i2.next();
+            ArrayList<MySet> array = i.next();
+            String symbolName = i2.next();
 
             for(int j = 0;j < array.size();j++){
                 for(int k = j + 1;k < array.size();k++){

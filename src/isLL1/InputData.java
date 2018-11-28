@@ -28,23 +28,23 @@ class InputData extends LinkedHashMap<String, ArrayList<ArrayList<MyToken>>>{
     }
 
     private void createAlter(InputData fromInData, InputData toInData){
-        Iterator i  = fromInData.values().iterator();
-        Iterator i2 = fromInData.keySet().iterator();
+        Iterator<ArrayList<ArrayList<MyToken>>> i  = fromInData.values().iterator();
+        Iterator<String> i2 = fromInData.keySet().iterator();
 
         toInData.clear();
         while(i.hasNext()){
-            ArrayList<ArrayList<MyToken>> dArray = (ArrayList<ArrayList<MyToken>>)i.next();
+            ArrayList<ArrayList<MyToken>> dArray = i.next();
             ArrayList<ArrayList<MyToken>> aDArray = new ArrayList<ArrayList<MyToken>>();
-            String symbolName = (String)i2.next();
-            Iterator ii = dArray.iterator();
+            String symbolName = i2.next();
+            Iterator<ArrayList<MyToken>> ii = dArray.iterator();
 
             while (ii.hasNext()){
-                ArrayList<MyToken> array = (ArrayList<MyToken>)ii.next();
+                ArrayList<MyToken> array = ii.next();
                 ArrayList<MyToken> aArray = new ArrayList<MyToken>();
-                Iterator iii = array.iterator();
+                Iterator<MyToken> iii = array.iterator();
 
                 while(iii.hasNext()){
-                    MyToken tk = (MyToken)iii.next();
+                    MyToken tk = iii.next();
 
                     aArray.add(new MyToken(tk.getName(), tk.getType()));
                 }
@@ -117,15 +117,15 @@ class InputData extends LinkedHashMap<String, ArrayList<ArrayList<MyToken>>>{
     }
 
     private void updateSymbolType(){
-        Iterator i = values().iterator();
+        Iterator<ArrayList<ArrayList<MyToken>>> i = values().iterator();
         while(i.hasNext()){
-            ArrayList<ArrayList<MyToken>> dArray = (ArrayList<ArrayList<MyToken>>)i.next();
-            Iterator ii = dArray.iterator();
+            ArrayList<ArrayList<MyToken>> dArray = i.next();
+            Iterator<ArrayList<MyToken>> ii = dArray.iterator();
             while (ii.hasNext()){
-                ArrayList<MyToken> array = (ArrayList<MyToken>)ii.next();
-                Iterator iii = array.iterator();
+                ArrayList<MyToken> array = ii.next();
+                Iterator<MyToken> iii = array.iterator();
                 while(iii.hasNext()){
-                    MyToken tk = (MyToken)iii.next();
+                    MyToken tk = iii.next();
                     if(tk.getType() == MyToken.UTSYMBOL){
                         tk.setType(containsKey(tk.getName()) ? MyToken.TSYMBOL : MyToken.NTSYMBOL);
                     }
@@ -135,22 +135,22 @@ class InputData extends LinkedHashMap<String, ArrayList<ArrayList<MyToken>>>{
     }
 
     private void checkInputData(MyContext context){
-        Iterator i  = values().iterator();
-        Iterator i2 = keySet().iterator();
+        Iterator<ArrayList<ArrayList<MyToken>>> i  = values().iterator();
+        Iterator<String> i2 = keySet().iterator();
 
         while(i.hasNext()){
             ArrayList<ArrayList<MyToken>> removeDArray = new ArrayList<ArrayList<MyToken>>();
-            ArrayList<ArrayList<MyToken>> dArray = (ArrayList<ArrayList<MyToken>>)i.next();
-            String symbolName = (String)i2.next();
+            ArrayList<ArrayList<MyToken>> dArray = i.next();
+            String symbolName = i2.next();
 
-            Iterator ii = dArray.iterator();
+            Iterator<ArrayList<MyToken>> ii = dArray.iterator();
             int epsilonCount = 0;
             while (ii.hasNext()){
                 MyToken lastLparTk, lastRparTk;
-                ArrayList<MyToken> array = (ArrayList<MyToken>)ii.next();
+                ArrayList<MyToken> array = ii.next();
                 ArrayList<MyToken> removeArray = new ArrayList<MyToken>();
                 LinkedList<MyToken> parCheck = new LinkedList<MyToken>();
-                Iterator iii = array.iterator();
+                Iterator<MyToken> iii = array.iterator();
                 String strLine = toLineString(symbolName);
                 int nparCount = 0;
                 int aparCount = 0;
@@ -159,7 +159,7 @@ class InputData extends LinkedHashMap<String, ArrayList<ArrayList<MyToken>>>{
                 lastLparTk = null;
                 lastRparTk = null;
                 while(iii.hasNext()){
-                    MyToken tk = (MyToken)iii.next();
+                    MyToken tk = iii.next();
                     if(tk.getType() == MyToken.EPSILON){
                         if(array.size() > 1){
                             context.printError(strLine + "空文字は単体でしか使用できません。");
@@ -280,17 +280,17 @@ class InputData extends LinkedHashMap<String, ArrayList<ArrayList<MyToken>>>{
     }
 
     private void reCheckInputData(MyContext context){
-        Iterator i  = values().iterator();
-        Iterator i2 = keySet().iterator();
+        Iterator<ArrayList<ArrayList<MyToken>>> i  = values().iterator();
+        Iterator<String> i2 = keySet().iterator();
 
         while(i.hasNext()){
             ArrayList<MyToken> insertArray = null;
-            ArrayList<ArrayList<MyToken>> dArray = (ArrayList<ArrayList<MyToken>>)i.next();
-            String symbolName = (String)i2.next();
+            ArrayList<ArrayList<MyToken>> dArray = i.next();
+            String symbolName = i2.next();
 
-            Iterator ii = dArray.iterator();
+            Iterator<ArrayList<MyToken>> ii = dArray.iterator();
             while (ii.hasNext()){
-                ArrayList<MyToken> array = (ArrayList<MyToken>)ii.next();
+                ArrayList<MyToken> array = ii.next();
                 LinkedList<MyToken> orParList = new LinkedList<MyToken>();
                 String strLine = toLineString(symbolName);
                 int parCount = 0;
@@ -378,11 +378,11 @@ class InputData extends LinkedHashMap<String, ArrayList<ArrayList<MyToken>>>{
                     }
                 }
                 if(symbolCount == 0){
-                    Iterator i_d = dArray.iterator();
+                    Iterator<ArrayList<MyToken>> i_d = dArray.iterator();
                     boolean  epsilonExist = false;
 
                     while(i_d.hasNext()){
-                        ArrayList<MyToken> cArray = (ArrayList<MyToken>)i_d.next();
+                        ArrayList<MyToken> cArray = i_d.next();
 
                         if(cArray.get(0).getType() == MyToken.EPSILON){
                             epsilonExist = true;
@@ -405,7 +405,6 @@ class InputData extends LinkedHashMap<String, ArrayList<ArrayList<MyToken>>>{
 
     private String toLineString(String symbolName){
         StringBuffer strBuf = new StringBuffer();
-        Iterator i = get(symbolName).iterator();
 
         strBuf.append(symbolName);
         strBuf.append(" ::= ");
@@ -415,13 +414,13 @@ class InputData extends LinkedHashMap<String, ArrayList<ArrayList<MyToken>>>{
 
     private StringBuffer toRightSideString(String symbolName){
         StringBuffer strBuf = new StringBuffer();
-        Iterator i = get(symbolName).iterator();
+        Iterator<ArrayList<MyToken>> i = get(symbolName).iterator();
 
         while(i.hasNext()){
-            Iterator ii = ((ArrayList<MyToken>)i.next()).iterator();
+            Iterator<MyToken> ii = i.next().iterator();
 
             while(ii.hasNext()){
-                MyToken tk = (MyToken)ii.next();
+                MyToken tk = ii.next();
 
                 strBuf.append(tk.getName() + " ");
             }
@@ -434,12 +433,13 @@ class InputData extends LinkedHashMap<String, ArrayList<ArrayList<MyToken>>>{
     }
 
     private void formatInputData(){
-        Iterator i = values().iterator();
+        Iterator<ArrayList<ArrayList<MyToken>>> i = values().iterator();
 
         while(i.hasNext()){
-            ArrayList<ArrayList<MyToken>> dArray = (ArrayList<ArrayList<MyToken>>)i.next();
+            ArrayList<ArrayList<MyToken>> dArray = i.next();
 
             for(int j = 0;j < dArray.size();j++){
+                @SuppressWarnings("unchecked")
                 ArrayList<MyToken> array = (ArrayList<MyToken>)dArray.get(j).clone();
                 boolean isInc = false;
 
@@ -500,19 +500,19 @@ class InputData extends LinkedHashMap<String, ArrayList<ArrayList<MyToken>>>{
     //for debug
     public void printInputData(MyContext context, boolean isTypeDebug){
         PrintStream out = context.getMyIO().getOutput();
-        Iterator i  = values().iterator();
-        Iterator i2 = keySet().iterator();
+        Iterator<ArrayList<ArrayList<MyToken>>> i  = values().iterator();
+        Iterator<String> i2 = keySet().iterator();
 
         while(i.hasNext()){
-            ArrayList<ArrayList<MyToken>> dArray = (ArrayList<ArrayList<MyToken>>)i.next();
-            String symbolName = (String)i2.next();
-            Iterator ii = dArray.iterator();
+            ArrayList<ArrayList<MyToken>> dArray = i.next();
+            String symbolName = i2.next();
+            Iterator<ArrayList<MyToken>> ii = dArray.iterator();
             out.print(symbolName + " ::= ");
             while (ii.hasNext()){
-                ArrayList<MyToken> array = (ArrayList<MyToken>)ii.next();
-                Iterator iii = array.iterator();
+                ArrayList<MyToken> array = ii.next();
+                Iterator<MyToken> iii = array.iterator();
                 while(iii.hasNext()){
-                    MyToken tk = (MyToken)iii.next();
+                    MyToken tk = iii.next();
 
                     out.print(tk.getName());
                     out.print((isTypeDebug ? "(" + tk.getType() + ") " : " "));
@@ -528,12 +528,12 @@ class InputData extends LinkedHashMap<String, ArrayList<ArrayList<MyToken>>>{
     }
 
     private void removeDup(ArrayList<ArrayList<MyToken>> dArray){
-        HashSet hSet = new HashSet();
+        HashSet<ArrayList<MyToken>> hSet = new HashSet<ArrayList<MyToken>>();
         ArrayList<ArrayList<MyToken>> retDArray = new ArrayList<ArrayList<MyToken>>();
-        Iterator i = dArray.iterator();
+        Iterator<ArrayList<MyToken>> i = dArray.iterator();
 
         while(i.hasNext()){
-            ArrayList<MyToken> array = (ArrayList<MyToken>)i.next();
+            ArrayList<MyToken> array = i.next();
 
             if(!hSet.contains(array)){
                 hSet.add(array);

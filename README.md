@@ -31,7 +31,8 @@
 
 ## 実行方法
 
-2017/09/06現在、javac時に警告が出力される。(時間があれば直します。)  
+~~2017/09/06現在、javac時に警告が出力される。~~  
+2018/11/28、[Pull Request](https://github.com/who3411/isLL1/pull/1)をmergeし、警告が出力されないようになりました。ありがとうございます。
 
 ```
 git clone git://github.com/who3411/isLL1.git
@@ -50,7 +51,7 @@ java -classpath out isLL1.LL1Check /path/to/EBNF/file
 1. LL1である場合(testcase/test1.txt)
 1. warningが発生かつLL1である場合(testcase/test2.txt)
 1. LL1でない場合(testcase/test3.txt)
-1. エラーが発生する場合(testcase/test5.txt)
+1. エラーが発生する場合(testcase/test4.txt)
 
 ### 実行例1
 
